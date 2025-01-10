@@ -1,0 +1,6 @@
+
+*.yaml
+*.txt
+*.json
+*.pyc
+.env
