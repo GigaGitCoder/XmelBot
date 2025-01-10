@@ -282,43 +282,46 @@ def answer(message):
 
 @bot.message_handler(commands=['members'])
 def list_members(message):
-    new_user(message.from_user.id, message)
-    chat_id = message.chat.id
-    
-    admins = bot.get_chat_administrators(chat_id)
-    admin_list = [f"@{admin.user.username} (id: `{admin.user.id}`)" for admin in admins if admin.user.username]
-
-    member_count = bot.get_chat_members_count(chat_id)
-    members = []
-    
-    for i in range(member_count):
-        try:
-            member = bot.get_chat_member(chat_id, i)
-            if member.user.username:
-                members.append(f"@{member.user.username} (id: `{member.user.id}`)")
-        except Exception as e:
-            pass
-
-    # Формируем ответ
-    response = "Участники группы:\n\n"
-    
-    if admin_list:
-        response += "👑Администраторы:\n" + "\n".join(admin_list) + "\n\n"
-    else:
-        response += "👑Администраторов нет.\n\n"
-    
-    if members:
-        response += "👤Участники:\n" + "\n".join(members) + "\n\n"
-    else:
-        response += "👤Участников нет.\n\n"
-    
-
     if message.chat.type != 'private':
-        bot.send_message(Logs_Group_ID, escape_formating(f"👥 Список участников {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n👤 @{message.from_user.username} (id: `{message.from_user.id}`)\n👥 {message.chat.title} (id: `{message.chat.id}`)\n\n```👤Request\n{message.text}```\n\n```🤖Response\n🧮 Ответ: {response}```\n\n#Flood_Members_Logs"), message_thread_id=Logs_Flood_Thread_ID, parse_mode="MarkdownV2")
-    else:
-        bot.send_message(Logs_Group_ID, escape_formating(f"👥 Список участников {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n👤 @{message.from_user.username} (id: `{message.from_user.id}`)\n\n```👤Request\n{message.text}```\n\n```🤖Response\n🧮 Ответ: {response}```\n\n#Flood_Members_Logs"), message_thread_id=Logs_Flood_Thread_ID, parse_mode="MarkdownV2")
+        new_user(message.from_user.id, message)
+        chat_id = message.chat.id
+        
+        admins = bot.get_chat_administrators(chat_id)
+        admin_list = [f"@{admin.user.username} (id: `{admin.user.id}`)" for admin in admins if admin.user.username]
 
-    bot.reply_to(message, escape_formating(response), parse_mode="MarkdownV2")
+        member_count = bot.get_chat_members_count(chat_id)
+        members = []
+        
+        for i in range(member_count):
+            try:
+                member = bot.get_chat_member(chat_id, i)
+                if member.user.username:
+                    members.append(f"@{member.user.username} (id: `{member.user.id}`)")
+            except Exception as e:
+                pass
+
+        # Формируем ответ
+        response = "Участники группы:\n\n"
+        
+        if admin_list:
+            response += "👑Администраторы:\n" + "\n".join(admin_list) + "\n\n"
+        else:
+            response += "👑Администраторов нет.\n\n"
+        
+        if members:
+            response += "👤Участники:\n" + "\n".join(members) + "\n\n"
+        else:
+            response += "👤Участников нет.\n\n"
+        
+
+        if message.chat.type != 'private':
+            bot.send_message(Logs_Group_ID, escape_formating(f"👥 Список участников {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n👤 @{message.from_user.username} (id: `{message.from_user.id}`)\n👥 {message.chat.title} (id: `{message.chat.id}`)\n\n```👤Request\n{message.text}```\n\n```🤖Response\n🧮 Ответ: {response}```\n\n#Flood_Members_Logs"), message_thread_id=Logs_Flood_Thread_ID, parse_mode="MarkdownV2")
+        else:
+            bot.send_message(Logs_Group_ID, escape_formating(f"👥 Список участников {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n👤 @{message.from_user.username} (id: `{message.from_user.id}`)\n\n```👤Request\n{message.text}```\n\n```🤖Response\n🧮 Ответ: {response}```\n\n#Flood_Members_Logs"), message_thread_id=Logs_Flood_Thread_ID, parse_mode="MarkdownV2")
+
+        bot.reply_to(message, escape_formating(response), parse_mode="MarkdownV2")
+    else:
+        bot.reply_to(message, escape_formating("☝️ Команду можно использовать только в групповых чатах"), parse_mode="MarkdownV2")
 
 @bot.message_handler(commands=['status'])
 def status(message):
