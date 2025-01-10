@@ -15,8 +15,8 @@ print(Fore.WHITE + rf""" __   __                     _   ____            _      
   / . \  | | | | | | |  __/ | | | |_) | | (_) | | |_     \ V /   | |  _  | |_| |
  /_/ \_\ |_| |_| |_|  \___| |_| |____/   \___/   \__|     \_/    |_| (_)  \___/ """ + Fore.CYAN + """
       
-     — https://github.com/GigaGitCoder """ + Fore.YELLOW + "— Apache-2.0 license " + Fore.RED +
-"— by Hunter " + Fore.RESET + "\n")
+    — https://github.com/GigaGitCoder/XmelBot """ + Fore.YELLOW + "— Apache-2.0 license " + Fore.RED +
+"— XmelBot_v1.0 " + Fore.RESET + "\n")
 
 bot = telebot.TeleBot(os.getenv('TOKEN'))  # BOTs TOKEN
 
@@ -206,7 +206,7 @@ def send_startup_message():
     if chat_ids is not []:
         for chat_id in chat_ids:
             try:
-                bot.send_message(chat_id.strip(), "Бот включен и готов к работе! 😎")
+                bot.send_message(chat_id.strip(), "Бот включен и готов к работе! (Версия: XmelBot_v1.0) 😎")
             except Exception as e:
                 print(f"Не удалось отправить сообщение в чат {chat_id.strip()}: {e}")
 
