@@ -56,3 +56,6 @@ def AI_answer(text: str, prompt: str = '', request_theme: str = "", deb: str = "
                     return response.strip()
 
         return None
+
+def escape_formating(text):
+    return text.replace('_', '\\_').replace('.', '\\.').replace(':', '\\:').replace('#', '\\#').replace('-', '\\-').replace('(', '\\(').replace(')', '\\)').replace('!', '\\!').replace('**', '*').replace('=', '\\=').replace('<', '\\<').replace('>', '\\>').replace('+', '\\+')
