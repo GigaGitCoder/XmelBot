@@ -1,3 +1,6 @@
+> [!WARNING]
+> AI responses can be very unstable because of bad working of g4f. Bot should not be used for buisness or serious projects.
+
 # XmelBot
 
 XmelBot is a Telegram bot with AI_responce and some admin/user commands with user-friendly interface.
